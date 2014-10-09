@@ -62,9 +62,9 @@
     self.beerPercentTextField.backgroundColor = [UIColor whiteColor];
     self.beerPercentTextField.textColor = [UIColor darkTextColor];
     self.numBeers.textColor = [UIColor darkTextColor];
-    self.calculateButton.backgroundColor = [UIColor brownColor];
+    self.calculateButton.backgroundColor = [UIColor colorWithRed:0.3 green:0.4 blue:0.3 alpha:1.0];
     self.resultLabel.backgroundColor = [UIColor whiteColor];
-    self.numBeers.backgroundColor = [UIColor whiteColor];
+    self.numBeers.backgroundColor = [UIColor colorWithHue:0.5 saturation:0.5 brightness:0.5 alpha:1.0];
     
     
     // Tells `self.beerCountSlider` that when its value changes, it should call `[self -sliderValueDidChange:]`.
@@ -120,11 +120,46 @@
 
     // try setting the autolayout programmatically
     self.calculateButton.translatesAutoresizingMaskIntoConstraints = NO;
-    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(_calculateButton);
-    NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-100-[_calculateButton]-100-|" options:0 metrics:nil views:viewsDictionary];
+    self.beerCountSlider.translatesAutoresizingMaskIntoConstraints = NO;
+    self.numBeers.translatesAutoresizingMaskIntoConstraints = NO;
+    self.beerPercentTextField.translatesAutoresizingMaskIntoConstraints = NO;
+    self.resultLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(_calculateButton, _beerCountSlider, _numBeers, _beerPercentTextField, _resultLabel);
+    NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-50-[_calculateButton]-50-|" options:0 metrics:nil views:viewsDictionary];
     constraints = [constraints arrayByAddingObjectsFromArray:
                    [NSLayoutConstraint
-                    constraintsWithVisualFormat:@"V:|-300-[_calculateButton]-100-|"
+                    constraintsWithVisualFormat:@"V:|-60-[_beerPercentTextField]-20-[_beerCountSlider]-20-[_resultLabel]-20-[_calculateButton]"
+                    options:0
+                    metrics:nil
+                    views:viewsDictionary]];
+    constraints = [constraints arrayByAddingObjectsFromArray:
+                   [NSLayoutConstraint
+                    constraintsWithVisualFormat:@"H:|-30-[_beerPercentTextField]-30-|"
+                    options:0
+                    metrics:nil
+                    views:viewsDictionary]];
+    constraints = [constraints arrayByAddingObjectsFromArray:
+                   [NSLayoutConstraint
+                    constraintsWithVisualFormat:@"H:|-20-[_beerCountSlider]-30-[_numBeers]-20-|"
+                    options:0
+                    metrics:nil
+                    views:viewsDictionary]];
+    constraints = [constraints arrayByAddingObjectsFromArray:
+                   [NSLayoutConstraint
+                    constraintsWithVisualFormat:@"V:[_numBeers(==_beerCountSlider)]"
+                    options:0
+                    metrics:nil
+                    views:viewsDictionary]];
+    constraints = [constraints arrayByAddingObjectsFromArray:
+                   [NSLayoutConstraint
+                    constraintsWithVisualFormat:@"V:[_beerPercentTextField]-20-[_numBeers]"
+                    options:0
+                    metrics:nil
+                    views:viewsDictionary]];
+    constraints = [constraints arrayByAddingObjectsFromArray:
+                   [NSLayoutConstraint
+                    constraintsWithVisualFormat:@"H:|-20-[_resultLabel]-20-|"
                     options:0
                     metrics:nil
                     views:viewsDictionary]];
@@ -134,6 +169,19 @@
                     options:0
                     metrics:nil
                     views:viewsDictionary]];
+    constraints = [constraints arrayByAddingObjectsFromArray:
+                   [NSLayoutConstraint
+                    constraintsWithVisualFormat:@"[_beerCountSlider(>=100,<=200)]"
+                    options:0
+                    metrics:nil
+                    views:viewsDictionary]];
+    constraints = [constraints arrayByAddingObjectsFromArray:
+                   [NSLayoutConstraint
+                    constraintsWithVisualFormat:@"[_numBeers(>=50,<=100)]"
+                    options:0
+                    metrics:nil
+                    views:viewsDictionary]];
+
     constraints = [constraints arrayByAddingObjectsFromArray:
                    [NSLayoutConstraint
                     constraintsWithVisualFormat:@"V:[_calculateButton(==44)]"
