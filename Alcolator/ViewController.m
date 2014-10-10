@@ -171,13 +171,13 @@
                     views:viewsDictionary]];
     constraints = [constraints arrayByAddingObjectsFromArray:
                    [NSLayoutConstraint
-                    constraintsWithVisualFormat:@"[_beerCountSlider(>=100,<=200)]"
+                    constraintsWithVisualFormat:@"[_beerCountSlider(>=100)]"
                     options:0
                     metrics:nil
                     views:viewsDictionary]];
     constraints = [constraints arrayByAddingObjectsFromArray:
                    [NSLayoutConstraint
-                    constraintsWithVisualFormat:@"[_numBeers(>=50,<=100)]"
+                    constraintsWithVisualFormat:@"[_numBeers(>=50)]"
                     options:0
                     metrics:nil
                     views:viewsDictionary]];
